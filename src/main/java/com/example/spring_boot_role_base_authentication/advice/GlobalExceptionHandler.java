@@ -1,9 +1,6 @@
 package com.example.spring_boot_role_base_authentication.advice;
 
-import com.example.spring_boot_role_base_authentication.exception.InvalidCredentialsException;
-import com.example.spring_boot_role_base_authentication.exception.RoleNotFoundException;
-import com.example.spring_boot_role_base_authentication.exception.UserDisabledException;
-import com.example.spring_boot_role_base_authentication.exception.UsernameAlreadyExistsException;
+import com.example.spring_boot_role_base_authentication.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,6 +26,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserDisabledException.class)
     public ResponseEntity<String> handleUserDisabled(UserDisabledException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.FORBIDDEN);
+    }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(TokenGenerationException.class)
+    public ResponseEntity<String> handleTokenGenerationException(TokenGenerationException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGeneralException(Exception ex) {
