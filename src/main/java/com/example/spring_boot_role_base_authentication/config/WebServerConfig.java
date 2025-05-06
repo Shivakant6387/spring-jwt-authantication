@@ -9,19 +9,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebServerConfig {
 
+    //    @Bean
+//    public ServletWebServerFactory servletContainer() {
+//        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+//        tomcat.addAdditionalTomcatConnectors(createHttpConnector());
+//        return tomcat;
+//    }
+//
+//    private Connector createHttpConnector() {
+//        Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+//        connector.setScheme("http");
+//        connector.setPort(8443); // HTTP port
+//        connector.setSecure(false);
+//        connector.setRedirectPort(8445); // Redirect to HTTPS
+//        return connector;
+//    }
     @Bean
     public ServletWebServerFactory servletContainer() {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
-        tomcat.addAdditionalTomcatConnectors(createHttpConnector());
         return tomcat;
-    }
-
-    private Connector createHttpConnector() {
-        Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
-        connector.setScheme("http");
-        connector.setPort(8443); // HTTP port
-        connector.setSecure(false);
-        connector.setRedirectPort(8445); // Redirect to HTTPS
-        return connector;
     }
 }
